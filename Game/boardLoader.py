@@ -1,6 +1,7 @@
 import json
 import Buff
 from wall import Wall
+from player import Player
 
 class defaultTile():
     colour = [255,255,255]
@@ -18,7 +19,7 @@ class Board:
             walls = data['walls']
             rPlayers = data['rPlayers']
             bPlayers = data['bPlayers']
-        self.playerMap = [ [0 for i in range(w)] for j in range(h)]
+        self.playerMap = [ [None for i in range(w)] for j in range(h)]
         self.gameBoard = [ [defaultTile() for i in range(w)] for j in range(h)]
         #initialize all buffs
         for i in range(0,len(buffs)):
@@ -44,12 +45,12 @@ class Board:
 
         #adding all players to the playerMap
         for p in bPlayers:
-            self.playerMap[p[1]][p[0]] = 1
+            self.playerMap[p[1]][p[0]] = Player(p[0],p[1],'blue')
             # print(p[1])
             # print(p[0])
             # print('')
         for p in rPlayers:
-            self.playerMap[p[1]][p[0]] = 2
+            self.playerMap[p[1]][p[0]] = Player(p[0],p[1],'red')
 
         ###testing
         # for v in self.gameBoard:

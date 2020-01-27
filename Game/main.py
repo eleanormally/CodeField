@@ -9,8 +9,8 @@ if type(boardName) is not str:
     boardName = input()
 mainBoard = Board(boardName)
 
-xsize = 1920
-ysize = 1080
+xsize = 820
+ysize = 800
 
 xc = len(mainBoard.gameBoard[0])
 yc = len(mainBoard.gameBoard)
@@ -38,6 +38,18 @@ def update(self):
         tx = (xsize-tileSize*xc)/2
         for c in r:
             cRender.draw_rect(tx,ty,tileSize,tileSize,c.colour)
+            tx+=tileSize
+        ty+=tileSize
+
+    #player display
+    tx = 0
+    ty = 0
+
+    for r in mainBoard.playerMap:
+        tx = (xsize-tileSize*xc)/2
+        for p in r:
+            if p is not None:
+                cRender.draw_rect(tx,ty,tileSize,tileSize,p.colour)
             tx+=tileSize
         ty+=tileSize
 
