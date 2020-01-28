@@ -1,4 +1,7 @@
 import json
+import importlib
+import sys
+sys.path.append('../Players')
 import Buff
 from wall import Wall
 from player import Player
@@ -10,7 +13,7 @@ class Board:
     gameBoard = []
     playerMap = None
 
-    def __init__(self, boardName):
+    def __init__(self, boardName,playerName):
         with open(('../Boards/'+boardName+'.json'),'r') as f:
             data = json.load(f)
             w = data['width']
@@ -19,7 +22,7 @@ class Board:
             walls = data['walls']
             rPlayers = data['rPlayers']
             bPlayers = data['bPlayers']
-        self.playerMap = [ [None for i in range(w)] for j in range(h)]
+        self.playerList = []
         self.gameBoard = [ [defaultTile() for i in range(w)] for j in range(h)]
         #initialize all buffs
         for i in range(0,len(buffs)):
@@ -43,14 +46,12 @@ class Board:
                             self.gameBoard[y][x] = b
                             break
 
+        customPlayerMod = importlib.import_module(playerName)
         #adding all players to the playerMap
         for p in bPlayers:
-            self.playerMap[p[1]][p[0]] = Player(p[0],p[1],'blue')
-            # print(p[1])
-            # print(p[0])
-            # print('')
+            self.playerList.append(customPlayerMod.CustomPlayer(p[0],p[1],'blue'))
         for p in rPlayers:
-            self.playerMap[p[1]][p[0]] = Player(p[0],p[1],'red')
+            self.playerList.append(customPlayerMod.CustomPlayer(p[0],p[1],'red'))
 
         ###testing
         # for v in self.gameBoard:

@@ -1,0 +1,14 @@
+version "Base Player Update":
+  added gridlines to make reading easier
+  better display things in general
+  changed how players were stored so that they wouldn't have to be reinitialized every frame
+  implemented player movement and data getting
+  added players folder to create custom players
+  added player selector to boardLoader.py
+  changed around some package settings to allow for better imports
+  added automatic moving up once per cycle to test movement
+
+  TODO:
+    damage and abilities to work
+    heal working
+    remove moving up automatically
